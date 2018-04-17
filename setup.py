@@ -7,7 +7,7 @@ with open('README.rst') as readme_file:
 
 requirements = [ ]
 
-setup_requirements = [ ]
+setup_requirements = [ 'requests' ]
 
 test_requirements = [ ]
 
