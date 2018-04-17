@@ -20,13 +20,20 @@ InvoiceXpress API - Python
         :target: https://github.com/bitmario/invoicexpress-api-python/blob/master/LICENSE.txt
 
 
-Thin Python 3 client for the InvoiceXpress REST API.
+Thin Python 3 client for the InvoiceXpress REST API. Currently rough and incomplete.
 
 API docs at: https://developers.invoicexpress.com/docs/versions/2.0.0/
 
-
-Sample usage
+Installation
 ------------
+
+.. code-block:: bash
+
+    pip install invoicexpress-api
+
+
+Usage
+-----
 
 .. code-block:: python
 
