@@ -13,6 +13,7 @@ InvoiceXpress API - Python
 
 .. image:: https://img.shields.io/badge/python-3.5%2C%203.6-blue.svg
         :alt: Python Versions
+        :target: https://pypi.python.org/pypi/invoicexpress_api
 
 .. image:: https://img.shields.io/badge/license-MIT-blue.svg
         :alt: MIT License
