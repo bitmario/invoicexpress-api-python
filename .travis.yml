@@ -1,0 +1,16 @@
+language: python
+python:
+- 3.6
+- 3.5
+# install: pip install -U tox-travis
+script: pytest
+deploy:
+  provider: pypi
+  distributions: sdist bdist_wheel
+  user: bitmario
+  password:
+    secure: hdxZpoksrzLnC0TmHrPzSmQNEzQyAlAfqqDHuXd+a4eltQqpeuKs3XaYotgMvDB5eAnclejR54Y0pjkBOkDGG6if/Fv+REdV6qbHZiDPYAS5Flgp+y15NGDAU8BW/IdjkFGkEv7+axbZGYVkmeP2cKoaMgWkpbjWXOASnLqvwkvmCDVBGlmZtFPJGva4VP2/34rkKGpR+7RePx/SeN5DwjsJHXr16DqX9WA7Q0BumMefaez6AKr3t8GM1nOzYCc8oN7cYJSMPugEbY3ra710GxUgzewogkpVek5usUUH6g0Jhqy4E0BWo6n8YQyYZzysSSLx9wbQqZAnO0ZKjHqXvL4bDcpQ3lgyeaBDy49kdiCaASeFvZqBJ8BwvJmy/fZjlTJCC2HSyFuebdk7o9auOzB6d+2nmeaBLx24G4pXcfICCTRMZ0PjR3xi+qGNXq/aa7+F4G1D2AePFnvdZKuIA0AVM2toXYv9NhXFe0S6JxabhN8oxinLi6ABlpfyXGxODtaARhqVvv84D2yXS8B2gaORU4Bl9nyzOCtPxE/1yz8qIhR+x9VYpzcX0y2BtLW/gan4O3mm1+X0UudaGfRohl9m+UL5xNYWVd7j04Af5uuJI9qY/0vAJIfsx+0iu8c/Au+OTAUE2sx0FaWu+FQ+ndeqJPL/tE2eyD3yq/CHe3Q=
+  on:
+    tags: true
+    repo: bitmario/invoicexpress-api-python
+    python: 3.6
