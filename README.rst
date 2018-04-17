@@ -7,12 +7,12 @@ InvoiceXpress API - Python
         :alt: PyPI
         :target: https://pypi.python.org/pypi/invoicexpress_api
 
-.. image:: https://img.shields.io/travis/bitmario/invoicexpress-api-python.svg
+.. image:: https://api.travis-ci.org/bitmario/invoicexpress-api-python.svg?branch=master
         :alt: Build Status
         :target: https://travis-ci.org/bitmario/invoicexpress-api-python
 
 .. image:: https://img.shields.io/badge/python-3.5%2C%203.6-blue.svg
-        :alt: Python Versions
+        :alt: Python 3.5, 3.6
         :target: https://pypi.python.org/pypi/invoicexpress_api
 
 .. image:: https://img.shields.io/badge/license-MIT-blue.svg
@@ -67,7 +67,7 @@ Usage
 	c = ie.Client(BASE_URL, API_KEY)
 	inv_type = ie.invoices.Types.INVOICE_RECEIPT
 	inv = ie.invoices.create(c, invoice_data, inv_type)
-	print('## Create invoice result')
+	print('## Invoice Created')
 	print(inv)
 
 	cli = ie.clients.code_search(c, inv[inv_type]['client']['code'])
@@ -88,7 +88,8 @@ Usage
 
 	print('PDF URL: ', ie.invoices.get_pdf_url(c, inv[inv_type]['id']))
 
-	ie.invoices.send_email(c, inv[inv_type]['id'], 'email@domail.tld', 'New invoice!', 'Hi John,\r\nHere is your new invoice\r\nRegards,')
+	ie.invoices.send_email(c, inv[inv_type]['id'], 'email@domail.tld', 'New invoice!',
+                           'Hi John,\r\nHere is your new invoice\r\nRegards,')
 	print('## E-mail sent')
 
 
