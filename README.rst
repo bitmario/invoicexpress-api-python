@@ -4,15 +4,18 @@ InvoiceXpress API - Python
 
 
 .. image:: https://img.shields.io/pypi/v/invoicexpress_api.svg
+		:alt: PyPI
         :target: https://pypi.python.org/pypi/invoicexpress_api
 
 .. image:: https://img.shields.io/travis/bitmario/invoicexpress-api-python.svg
+		:alt: Build Status
         :target: https://travis-ci.org/bitmario/invoicexpress-api-python
 
-.. image:: https://img.shields.io/pypi/pyversions/invoicexpress_api.svg
-        :target: https://pypi.python.org/pypi/invoicexpress_api
+.. image:: https://img.shields.io/badge/python-3.5%2C%203.6-blue.svg
+		:alt: Python Versions
 
-.. image:: https://img.shields.io/pypi/l/invoicexpress-api-python.svg
+.. image:: https://img.shields.io/badge/license-MIT-blue.svg
+		:alt: MIT License
         :target: https://github.com/bitmario/invoicexpress-api-python/blob/master/LICENSE.txt
 
 
