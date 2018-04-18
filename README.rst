@@ -2,7 +2,6 @@
 InvoiceXpress API - Python
 ==========================
 
-
 .. image:: https://img.shields.io/pypi/v/invoicexpress_api.svg
         :alt: PyPI
         :target: https://pypi.python.org/pypi/invoicexpress_api
@@ -24,76 +23,198 @@ Thin Python 3 wrapper for the InvoiceXpress REST API. Currently rough and incomp
 
 API docs at: https://developers.invoicexpress.com/docs/versions/2.0.0/
 
+Included APIs
+-------------
+
+================== =========
+API                Done in
+================== =========
+Invoices_          v0.1.0
+Estimates_         to-do
+Guides_            to-do
+`Purchase Orders`_ to-do
+Clients_           v0.1.0
+Items_             to-do
+Sequences_         to-do
+Taxes_             to-do
+Accounts_          to-do
+SAF-T_             to-do
+================== =========
+
+.. _Invoices: https://developers.invoicexpress.com/docs/versions/2.0.0/resources/invoices
+.. _Estimates: https://developers.invoicexpress.com/docs/versions/2.0.0/resources/estimates
+.. _Guides: https://developers.invoicexpress.com/docs/versions/2.0.0/resources/guides
+.. _`Purchase Orders`: https://developers.invoicexpress.com/docs/versions/2.0.0/resources/purchase-orders
+.. _Clients: https://developers.invoicexpress.com/docs/versions/2.0.0/resources/clients
+.. _Items: https://developers.invoicexpress.com/docs/versions/2.0.0/resources/items
+.. _Sequences: https://developers.invoicexpress.com/docs/versions/2.0.0/resources/sequences
+.. _Taxes: https://developers.invoicexpress.com/docs/versions/2.0.0/resources/taxes
+.. _Accounts: https://developers.invoicexpress.com/docs/versions/2.0.0/resources/accounts
+.. _SAF-T: https://developers.invoicexpress.com/docs/versions/2.0.0/resources/saf-t
+
 Installation
 ------------
 
+Automatic install via pip:
+
 .. code-block:: bash
 
-    pip install invoicexpress-api
+    $ pip install invoicexpress-api
 
 
 Usage
 -----
 
-.. code-block:: python
+Setup
+^^^^^
+.. code-block:: pycon
 
-	import invoicexpress_api as ie
+    >>> import invoicexpress_api as ie
+    >>> c = ie.Client('my_account_name', 'my_api_key')
 
-	ACCOUNT_NAME = 'mycompany'
-	API_KEY = 'my api key'
+Create an invoice
+^^^^^^^^^^^^^^^^^
+.. code-block:: pycon
 
-	invoice_data = {
-	  "invoice": {
-		"date": "17/04/2018",
-		"due_date": "17/04/2018",
-		"client": {
-			"name": "John Doe",
-			"code": "XYZ123"
-		},
-		"items": [
-			{
-			  "name": "SRV1",
-			  "description": "Service 1",
-			  "unit_price": 10.0,
-			  "quantity": 5.0,
-			  "tax": {
-				  "name": "IVA23"
-				  }
-			}
-		  ]
-	   }
-	}
+    >>> invoice_type = ie.invoices.Types.INVOICE_RECEIPT
+    >>> invoice_data = {
+      "invoice": {
+            "date": "17/04/2018",
+            "due_date": "17/04/2018",
+            "client": {
+                    "name": "John Doe",
+                    "code": "XYZ123"
+            },
+            "items": [
+                    {
+                      "name": "SRV1",
+                      "description": "Service 1",
+                      "unit_price": 10.0,
+                      "quantity": 5.0,
+                      "tax": {
+                              "name": "IVA23"
+                              }
+                    }
+              ]
+       }
+    }
+    >>> ie.invoices.create(c, invoice_data, invoice_type)
+    {
+        'invoice_receipt':{
+            'id':12345678,
+            'status':'draft',
+            'archived':False,
+            'type':'InvoiceReceipt',
+            'sequence_number':'rascunho',
+            'date':'17/04/2018',
+            'due_date':'17/04/2018',
+            'reference':None,
+            'observations':None,
+            'retention':None,
+            'permalink':'https://www.app.invoicexpress.com/documents/113a4152...',
+            'sum':50.0,
+            'discount':0.0,
+            'before_taxes':50.0,
+            'taxes':11.5,
+            'total':61.5,
+            'currency':'Euro',
+            'client':{
+                'id':1234567,
+                'name':'John Doe',
+                'code':'XYZ123'
+            },
+            'items':[
+                {
+                    'name':'SRV1',
+                    'description':'Service 1',
+                    'unit_price':'10.0',
+                    'unit':None,
+                    'quantity':'5.0',
+                    'tax':{
+                        'id':123456,
+                        'name':'IVA23',
+                        'value':23.0
+                    },
+                    'discount':0.0,
+                    'subtotal':50.0,
+                    'tax_amount':11.5,
+                    'discount_amount':0.0,
+                    'total':61.5
+                }
+            ]
+        }
+    }
 
-	c = ie.Client(ACCOUNT_NAME, API_KEY)
-	inv_type = ie.invoices.Types.INVOICE_RECEIPT
-	inv = ie.invoices.create(c, invoice_data, inv_type)
-	print('## Invoice Created')
-	print(inv)
+Fetch and update an invoice
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. code-block:: pycon
+    
+    >>> inv = ie.invoices.get(c, 12345678, invoice_type)
+    >>> inv[invoice_type]['items'][0]['unit_price'] = 150
+    >>> ie.invoices.update(c, 12345678, inv, invoice_type)
+    >>> ie.invoices.get(c, 12345678, invoice_type)
+    {
+        'invoice_receipt':{
+            'id':12345678,
+            'status':'settled',
+            'archived':False,
+            'type':'InvoiceReceipt',
+            'sequence_number':'1/A',
+            'inverted_sequence_number':'A/1',
+            'sequence_id':123456,
+            'date':'17/04/2018',
+            'due_date':'17/04/2018',
+            'reference':None,
+            'observations':None,
+            'retention':None,
+            'permalink':'https://www.app.invoicexpress.com/documents/113a4152...',
+            'saft_hash':'iyuX',
+            'sum':750.0,
+            'discount':0.0,
+            'before_taxes':750.0,
+            'taxes':172.5,
+            'total':922.5,
+            'currency':'Euro',
+            'client':{
+                'id':1234567,
+                'name':'John Doe',
+                'code':'XYZ123',
+            },
+            'items':[
+                {
+                    'name':'SRV1',
+                    'description':'Service 1',
+                    'unit_price':'150.0',
+                    'unit':None,
+                    'quantity':'5.0',
+                    'tax':{
+                        'id':123456,
+                        'name':'IVA23',
+                        'value':23.0
+                    },
+                    'discount':0.0,
+                    'subtotal':750.0,
+                    'tax_amount':172.5,
+                    'discount_amount':0.0,
+                    'total':922.5
+                }
+            ]
+        }
+    }
 
-	cli = ie.clients.code_search(c, inv[inv_type]['client']['code'])
-	cli_upd = {"client": {"fiscal_id": "212345678", "country": "Portugal"}}
-	ie.clients.update(c, cli['client']['id'], cli_upd)
-	print('## Client Updated')
-	print(cli)
 
-	inv[inv_type]['items'][0]['unit_price'] = 150
-	ie.invoices.update(c, inv[inv_type]['id'], inv, inv_type)
-	print('## Invoice Updated')
-	print(inv)
-
-	ie.invoices.change_state(c, inv[inv_type]['id'], ie.Invoices.States.FINAL)
-	inv = ie.invoices.get(c, inv[inv_type]['id'])
-	print('## Invoice Settled')
-	print(inv)
-
-	print('PDF URL: ', ie.invoices.get_pdf_url(c, inv[inv_type]['id']))
-
-	ie.invoices.send_email(c, inv[inv_type]['id'], 'email@domail.tld', 'New invoice!',
-                           'Hi John,\r\nHere is your new invoice\r\nRegards,')
-	print('## E-mail sent')
-
+Set invoice state and send by e-mail
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. code-block:: pycon
+    
+    >>> ie.invoices.change_state(c, 12345678, ie.invoices.States.FINAL)
+    >>> ie.invoices.send_email(c, 12345678, 'name@domain.tld',
+			       'New invoice!',
+			       'Hi John,\r\nHere is your invoice\r\nRegards,')
 
 License
 --------
 
-MIT
+MIT License. See the `LICENSE 
+<https://github.com/bitmario/invoicexpress-api-python/blob/master/LICENSE.txt>`_ 
+file for details.
