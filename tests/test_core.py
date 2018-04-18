@@ -4,7 +4,7 @@ from invoicexpress_api import Client
 
 @fixture
 def client():
-    return Client('https://dummy.app.invoicexpress.com', 'secret123')
+    return Client('dummy', 'secret123')
 
 
 def test_build_params(client):

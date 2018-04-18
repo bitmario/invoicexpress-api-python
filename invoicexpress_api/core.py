@@ -1,14 +1,17 @@
 import time
 import requests
+from requests.compat import urljoin
 
 
 class Client:
     base_url = ''
+    account_name = ''
     api_key = ''
 
-    def __init__(self, base_url: str, api_key: str):
-        self.base_url = base_url
+    def __init__(self, account_name: str, api_key: str):
+        self.account_name = account_name
         self.api_key = api_key
+        self.base_url = 'https://{}.app.invoicexpress.com/'.format(account_name)
 
     @staticmethod
     def _check_http_status(response: requests.Response) -> str:
@@ -22,7 +25,7 @@ class Client:
         return urlparams
 
     def _build_url(self, path: str) -> str:
-        return '{}{}'.format(self.base_url, path)
+        return urljoin(self.base_url, path)
 
     def get(self, path: str, urlparams={}):
         r = None
