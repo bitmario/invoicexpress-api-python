@@ -11,16 +11,16 @@ InvoiceXpress API - Python
         :alt: Build Status
         :target: https://travis-ci.org/bitmario/invoicexpress-api-python
 
-.. image:: https://img.shields.io/badge/python-3.5%2C%203.6-blue.svg
-        :alt: Python 3.5, 3.6
-        :target: https://pypi.python.org/pypi/invoicexpress_api
+.. image:: https://img.shields.io/badge/python-3.3%2C%203.4%2C%203.5%2C%203.6-blue.svg
+        :alt: Python 3.3, 3.4, 3.5, 3.6
+        :target: https://travis-ci.org/bitmario/invoicexpress-api-python
 
 .. image:: https://img.shields.io/badge/license-MIT-blue.svg
         :alt: MIT License
         :target: https://github.com/bitmario/invoicexpress-api-python/blob/master/LICENSE.txt
 
 
-Thin Python 3 client for the InvoiceXpress REST API. Currently rough and incomplete.
+Thin Python 3 wrapper for the InvoiceXpress REST API. Currently rough and incomplete.
 
 API docs at: https://developers.invoicexpress.com/docs/versions/2.0.0/
 
