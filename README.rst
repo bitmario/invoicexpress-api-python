@@ -39,7 +39,7 @@ Usage
 
 	import invoicexpress_api as ie
 
-	BASE_URL = 'https://mycompany.app.invoicexpress.com'
+	ACCOUNT_NAME = 'mycompany'
 	API_KEY = 'my api key'
 
 	invoice_data = {
@@ -64,7 +64,7 @@ Usage
 	   }
 	}
 
-	c = ie.Client(BASE_URL, API_KEY)
+	c = ie.Client(ACCOUNT_NAME, API_KEY)
 	inv_type = ie.invoices.Types.INVOICE_RECEIPT
 	inv = ie.invoices.create(c, invoice_data, inv_type)
 	print('## Invoice Created')
